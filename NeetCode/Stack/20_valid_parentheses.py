@@ -1,27 +1,16 @@
 # https://leetcode.com/problems/valid-parentheses/
-class Solution(object):
-    def isValid(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
-        # Initialize list for stack constructure
+class Solution:
+    def isValid(self, s: str) -> bool:
         stack = []
-        # Map parenthood between brackets
-        map_symbols = {"]":"[", "}":"{", ")":"("}
-        
+        close2open = {")":"(", "]":"[", "}":"{"}
         for item in s:
-            # If we got opening bracket - add it to the stack
-            if item in map_symbols.values():
-                stack.append(item)
-                
-            # Else - we got closing bracket
-            else:
-                # Check if stack is already empty or previous bracket doesn't match with current one
-                if stack == [] or stack[-1] != map_symbols[item]:
+            if item in close2open:
+                # if we get closing braket for correct stack it should have opening pair
+                # and stack should not be empty. Thus, we can drop this valid pair
+                if stack and stack[-1] == close2open[item]:
+                    stack.pop()
+                else:
                     return False
-                # If everything is OK - remove opening bracket from stack, because we have found a pair for it.
-                stack.pop()
-         
-        # Return final stack state after all iterations 
+            else:
+                stack.append(item)
         return stack == []
