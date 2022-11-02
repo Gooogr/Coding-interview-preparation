@@ -1,58 +1,47 @@
 #https://leetcode.com/problems/top-k-frequent-elements/
-# Naive approach with sorted dict keys
-# Complexity: O(n**2)
-class Solution(object):
-    def topKFrequent(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: List[int]
-        """
-        dict_count = dict()
-        for item in set(nums):
-            dict_count[item] = nums.count(item)
-        sorted_keys = [key for key, _ in sorted(dict_count.items(), 
-                                                key = lambda x: x[1],
-                                                reverse = True)]
-        return sorted_keys[:k]
+# Naive approach with complexity O(n*Log(n)) - full sort at the end
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        if len(nums) == k:
+            return nums
+        freq_hash = dict()
+        for num in nums:
+            if num not in freq_hash:
+                freq_hash[num] = 1
+            else:
+                freq_hash[num] += 1
+        return [k for k, v in sorted(freq_hash.items(), key=lambda x: x[1], reverse=True)][:k]
 
 # Better approach - use max heap and extract only necessary elements amount
 # Complexity: O(k*log(n))
 
-# Even better - bucket sort approach
+# Even better - sublists where idx = value frequency
 # Complexity: O(n)
-
-# General idea: use list where:
-# indecis - times of element occurence
-# values - list of elements with the same occurence
-# Default length of this array equal to len(nums), because in the worst case all 
-# elements are unique.
-
-class Solution(object):
-    def topKFrequent(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: List[int]
-        """
-        count = dict()
-        freq = [[] for _ in range(len(nums) + 1)]
-        
-        # Count element frequency occurenece and save in hashmap
-        for number in nums:
-            count[number] = count.get(number, 0) + 1
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        if len(nums) == k:
+            return nums
             
-        # Place every pair in list.
-        # Structure: index - frequency, values - corresponded lists of values
-        for number, freq_idx in count.items():
-            freq[freq_idx].append(number)
-        
-        # extract target amount of numbers from comprehended list
+        # Find frequnecy for every unique value
+        freq_hash = dict()
+        for num in nums:
+            freq_hash[num] = freq_hash.get(num, 0) + 1
+            
+        # Put values in sublists based on their frequency (sublist idx = frequency)
+        # We need nums + 1 baskets, becasue in worst case (all values are the same)
+        # freq = len(nums) + 1 and all other buskest would be empty.
+        freq_list = [[] for _ in range(len(nums) + 1)]
+        print(freq_list)
+        for value, freq in freq_hash.items():
+            freq_list[freq].append(value)
+            
+        # Extract K most frequent elements
         result = []
-        for idx in range(len(freq) -1, 0, -1):
-            for number in freq[idx]:
-                result.append(number)
+        for sublist in freq_list[::-1]:
+            for value in sublist:
+                result.append(value)
                 if len(result) == k:
                     return result
+            
 
 
