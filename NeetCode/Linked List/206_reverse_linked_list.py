@@ -20,3 +20,15 @@ class Solution:
             prev = curr               # step forward in original order   
             curr = next_original      # step forward in original order
         return prev
+
+# Recursive approach
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        def reverse(cur, prev):
+            if cur is None:
+                return prev
+            else:
+                next = cur.next
+                cur.next = prev
+                return reverse(next, cur)
+        return reverse(head, None)
