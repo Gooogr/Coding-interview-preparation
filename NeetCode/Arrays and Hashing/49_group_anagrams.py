@@ -1,8 +1,12 @@
 #https://leetcode.com/problems/group-anagrams/ 
+
+from typing import List
+import collections
+
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         
-        def get_anagram_state(word: str) -> list[int]:
+        def get_anagram_state(word: str) -> List[int]:
             state = [0] * 26 #a..z
             for letter in word:
                 state_idx = ord(letter) - ord('a')
@@ -21,12 +25,12 @@ class Solution:
 # With default dict
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-	anagrams_hash = collections.defaultdict(list)
-	for word in strs:
-	    state = [0] * 26
-	    for letter in word:
-	        state[ord(letter) - ord('a')] += 1
-	    anagrams_hash[str(state)].append(word)
-	return anagrams_hash.values()
+        anagrams_hash = collections.defaultdict(list)
+        for word in strs:
+            state = [0] * 26
+            for letter in word:
+                state[ord(letter) - ord('a')] += 1
+            anagrams_hash[str(state)].append(word)
+        return anagrams_hash.values()
 
 

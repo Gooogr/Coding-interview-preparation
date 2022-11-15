@@ -1,5 +1,8 @@
 # https://leetcode.com/problems/contains-duplicate/
 # Faster than return len(nums) == len(set(nums))
+
+from typing import List
+
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
         prev_hash = set()
