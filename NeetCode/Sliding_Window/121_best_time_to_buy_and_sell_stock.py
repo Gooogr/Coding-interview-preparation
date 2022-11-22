@@ -10,7 +10,7 @@ class Solution(object):
         buy_idx = 0
 
         for cell_idx in range(1, len(prices)):
-            # If we found cheaper buy point - use it
+            # If we could by cheaper - use this point
             if prices[buy_idx] > prices[cell_idx]:
                 buy_idx = cell_idx
             # Find current profit and compare it with maximum profit
