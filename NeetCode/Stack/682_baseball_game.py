@@ -6,9 +6,7 @@ class Solution:
     def calPoints(self, operations: List[str]) -> int:
         stack = []
         for item in operations:
-            if item.lstrip("-").isnumeric():
-                stack.append(int(item))
-            elif item == '+':
+            if item == '+':
                 prev_sum = int(stack[-1]) + int(stack[-2])
                 stack.append(prev_sum)
             elif item == 'D':
@@ -16,5 +14,6 @@ class Solution:
                 stack.append(double)
             elif item == 'C':
                 stack.pop()
-        print(stack)
+            else:
+                stack.append(int(item))
         return sum(stack)
