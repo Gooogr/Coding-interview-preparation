@@ -12,5 +12,6 @@ class Solution:
             while stack and temp > stack[-1][0]:
                 _, stack_idx = stack.pop()
                 result[stack_idx] = idx - stack_idx
+            # Thus, it's a monotonic decreasing stack
             stack.append([temp, idx])
         return result
