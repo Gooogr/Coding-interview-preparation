@@ -6,25 +6,20 @@ class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
-
-# Iterative approach
+        
+#### While loop approach ####
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        prev = None # end point of reversed list
-        curr = head # head of list that will connect to reversed list at first
-        # Geneal idea:
-        # None, 1->2
-        # None<-1, 2
-        # None<-1<-2 
-        # Next element in original order for 2 is None - exit while loop
-        while curr:
-            next_original = curr.next # remember next step before broken link
-            curr.next = prev          # change link from -> to <-       
-            prev = curr               # step forward in original order   
-            curr = next_original      # step forward in original order
-        return prev
+        prev, curr = None, head
+        while curr:          # repeat until we get to the end of original linked list
+            temp = curr.next # save old link
+            curr.next = prev # create new reversed link
+            # make step
+            prev = curr
+            curr = temp
+        return prev          # return new head
 
-# Recursive approach
+#### Recursive approach ####
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         def reverse(cur, prev):
