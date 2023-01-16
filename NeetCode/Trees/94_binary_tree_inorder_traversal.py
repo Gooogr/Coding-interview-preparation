@@ -29,3 +29,5 @@ class Solution:
             traverse(node.right)
         traverse(root)
         return result
+
+# iterative approach
