@@ -9,6 +9,9 @@ class TreeNode:
         self.left = left
         self.right = right
 
+# Complexity:
+# Time - O(n) 
+# Memory - O(1) 
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         max_diam = 0
