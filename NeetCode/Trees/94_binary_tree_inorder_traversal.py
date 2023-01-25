@@ -22,12 +22,10 @@ class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         result = []
         def traverse(node: Optional[TreeNode]):
-            if not node:
-                return 
-            traverse(node.left)
-            result.append(node.val)
-            traverse(node.right)
+            if node:
+                traverse(node.left)
+                result.append(node.val)
+                traverse(node.right)
         traverse(root)
         return result
 
-# iterative approach
