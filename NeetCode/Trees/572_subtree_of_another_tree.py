@@ -45,11 +45,10 @@ class Solution:
         '''
         if root1 is None and root2 is None:
             return True
-        elif root1 is None or root2 is None:
+        if root1 is None or root2 is None:
             return False
-        else:
-            return (
-                root1.val == root2.val and
-                self.is_same_tree(root1.left, root2.left) and
-                self.is_same_tree(root1.right, root2.right)
-                )
+        return (
+            root1.val == root2.val and
+            self.is_same_tree(root1.left, root2.left) and
+            self.is_same_tree(root1.right, root2.right)
+            )
