@@ -8,7 +8,8 @@ class ListNode:
         self.val = x
         self.next = None
 
-# With O(n) additional memory
+# Time complexity O(n)
+# Space complexity O(n) 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         prev, curr = None, head
@@ -20,14 +21,14 @@ class Solution:
             curr = curr.next
         return False
 
-# With O(1) additional memory
+# Time complexity O(n)
+# Space complexity O(1) 
 class Solution:
-    def hasCycle(self, head: ListNode) -> bool:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
         slow, fast = head, head
-
         while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-            if slow == fast:
-                return True
+            slow = slow.next      # slow pointer - one step
+            fast = fast.next.next # fast pointer - two steps
+            if fast == slow:
+                return True       # if the meet again - we have loop
         return False
