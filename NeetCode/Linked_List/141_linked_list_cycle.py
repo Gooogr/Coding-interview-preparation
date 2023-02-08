@@ -12,7 +12,7 @@ class ListNode:
 # Space complexity O(n) 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        prev, curr = None, head
+        curr = head
         visited_nodes = set()
         while curr:
             if curr in visited_nodes:
