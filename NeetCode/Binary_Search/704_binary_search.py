@@ -1,22 +1,16 @@
 # https://leetcode.com/problems/binary-search/
-class Solution(object):
-    def search(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: int
-        """
-        n = len(nums)
-        left_idx = 0
-        right_idx = n - 1
 
-        while left_idx <= right_idx:
-            midpoint = left_idx + (right_idx - left_idx) // 2
-            midpoint_value = nums[midpoint]
-            if midpoint_value == target:
-                return midpoint
-            elif midpoint_value < target:
-                left_idx = midpoint + 1
+from typing import List
+
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        l, r = 0, len(nums) - 1
+        while l <= r:
+            middle = (l + r) // 2
+            if nums[middle] == target:
+                return middle
+            elif nums[middle] < target:
+                l = middle + 1
             else:
-                right_idx = midpoint - 1
+                r = middle - 1
         return -1
