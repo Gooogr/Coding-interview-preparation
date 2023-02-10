@@ -11,7 +11,7 @@ class Solution:
             square = middle * middle
             plus_square = (middle + 1)*(middle + 1)
             
-            # print(middle, square, x)
+            # exlude upper bound sqrt(8)~= 2.7 -> [2, 3)
             if square <= x < plus_square:
                 return middle
             elif square > x:
