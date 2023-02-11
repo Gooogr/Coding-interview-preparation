@@ -38,3 +38,34 @@ class Solution:
         return output
 
 # Optimal solution with O(1) spacy complexity
+class Solution:
+    prev_value = None
+    current_count = 0
+    max_count = 0
+    result = []
+
+    def findMode(self, root: Optional[TreeNode]) -> List[int]:
+        self.inorder_dfs(root)
+        return self.result
+
+    def inorder_dfs(self, node: Optional[TreeNode]) -> List[int]:
+        if not node:
+            return None
+
+        # inorder DFS will give us sorted vales
+        self.inorder_dfs(node.left)
+
+        # Update counter
+        if self.prev_value != node.val:
+            self.current_count = 0
+        self.current_count += 1
+
+        # Update result list with mode(s)
+        if self.current_count == self.max_count:
+            self.result.append(node.val)
+        if self.current_count > self.max_count:
+            self.result = [node.val]
+            self.max_count =self.current_count
+        self.prev_value = node.val
+        
+        self.inorder_dfs(node.right)
