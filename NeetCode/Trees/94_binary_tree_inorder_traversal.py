@@ -29,3 +29,16 @@ class Solution:
         traverse(root)
         return result
 
+# Another recursive approach
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        def dfs(node, values=[]):
+            if not node: 
+                return None
+            dfs(node.left, values)
+            values.append(node.val)
+            dfs(node.right, values)
+            return values
+        result = dfs(root)
+        return result
+
