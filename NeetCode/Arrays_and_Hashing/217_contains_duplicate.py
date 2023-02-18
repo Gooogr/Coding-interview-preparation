@@ -5,8 +5,9 @@ from typing import List
 
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
-        prev_hash = set()
-        for value in nums:
-            if value in prev_hash:
+        nums_set = set()
+        for num in nums:
+            if num in nums_set:
                 return True
-            prev_hash.add(value)
+            nums_set.add(num)
+        return False
