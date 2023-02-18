@@ -35,9 +35,10 @@ class Solution:
             freq_map[s[r]] = freq_map.get(s[r], 0) + 1
             max_freq = max(freq_map[s[r]], max_freq)
 
-            # penalty for l+=1 if we failed condition
-            # thus (r - l + 1) can't be more than max_freq for next iteration
-            if (r - l + 1) - max_freq > k:
+            # Truncate string
+            # BTW, we can replace `while`` by `if`
+            # Thus we will penalize (r - l + 1) by one, which will be enough
+            while (r - l + 1) - max_freq > k:
                 freq_map[s[l]] -= 1
                 l += 1
 
