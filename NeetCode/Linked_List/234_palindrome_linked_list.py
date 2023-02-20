@@ -31,26 +31,30 @@ class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
         fast = head
         slow = head
-        
-        # Find middle and end of LL
-        while fast and fast.next: #make sure that we don't jump over LL
+
+        # Find middle (slow pointer end position)
+        # iteate until fast in None or in last element
+        while fast and fast.next:
             fast = fast.next.next
             slow = slow.next
-            
-        # Reverse second half of LL
+        
+        # Reverse the seconds half: from middle (slow pointer) to the end
         prev = None
         while slow:
             tmp = slow.next
             slow.next = prev
             prev = slow
             slow = tmp
-            
-        # Now we can compare both parts
+        
+        # Iterate again to the middle -> <-
+        # 1 -> 2 -> 2 <- 1
+        # 1 -> 2 -> 3 <- 2 <- 1
         left, right = head, prev
-        while right:
+        while right: #until we get to the middle
             if left.val != right.val:
                 return False
             left = left.next
             right = right.next
+
         return True
             
