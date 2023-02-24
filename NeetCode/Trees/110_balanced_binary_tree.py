@@ -8,6 +8,7 @@ class TreeNode:
         self.left = left
         self.right = right
 
+# Original NeetCode solution
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
         is_balanced = True
@@ -27,3 +28,20 @@ class Solution:
             return 1 + max(height_left, height_right)
         dfs(root)
         return is_balanced
+
+# Recursive approach with -1 flag    
+class Solution:
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+
+        def validate_tree(root):
+            if not root:
+                return 0
+            left = validate_tree(root.left)
+            right = validate_tree(root.right)
+
+            # push -1 in case of non-balanced tree in result
+            if left == -1 or right == -1 or abs(left - right) > 1:
+                return -1
+
+            return 1 + max(left, right)
+        return validate_tree(root) != -1
