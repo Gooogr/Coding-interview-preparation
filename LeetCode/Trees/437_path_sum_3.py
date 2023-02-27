@@ -9,6 +9,10 @@ class TreeNode:
         self.left = left
         self.right = right
 
+# Optimized approach where we store our rolling sum.
+# Something like cache in 2sum task
+# Time complexity: O(n)
+# Memory complexity O(n)
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
         result = 0
@@ -36,4 +40,34 @@ class Solution:
             freq_map[curr_sum] -= 1
 
         dfs(root, 0)
+        return result
+
+# Naive approach where we visit every node and check all pathes from it
+# Time complexity: O(n**2)
+# Memory complexity O(n)
+class Solution:
+    def pathSum(self, root: TreeNode, sum: int) -> int:
+        result = 0
+        
+        def dfs(node, target):
+            '''
+            Traverse over all tree nodes
+            '''
+            if node is None: return
+            find_path_from_node(node, target)
+            dfs(node.left, target)
+            dfs(node.right, target)
+                
+        def find_path_from_node(node, target):
+            '''
+            Find all valid pathes from current node
+            '''
+            nonlocal result
+            if node is None: return
+            if node.val == target: result += 1
+            find_path_from_node(node.left, target-node.val)
+            find_path_from_node(node.right, target-node.val)
+            
+        dfs(root, sum)
+        
         return result
