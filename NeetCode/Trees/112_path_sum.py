@@ -9,6 +9,7 @@ class TreeNode:
         self.left = left
         self.right = right
 
+# PreOrder DFS to every leaf with sum checking
 class Solution:
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
         def dfs(root, curr_sum):
