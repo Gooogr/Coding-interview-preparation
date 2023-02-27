@@ -29,3 +29,21 @@ class Solution:
              result = heapq.heappop(arr)
              k -= 1
         return result
+
+# InOrder DFS - traverse to target node until k=0   
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        result = None
+
+        def dfs(root):
+            nonlocal k, result
+            if not root:
+                return None
+            dfs(root.left)
+            k-= 1
+            if k == 0:
+                result = root.val
+                return None
+            dfs(root.right)
+        dfs(root)
+        return result
