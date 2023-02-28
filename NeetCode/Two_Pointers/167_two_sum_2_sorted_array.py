@@ -1,25 +1,19 @@
 # https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
-# Optimal O(n)
-class Solution(object):
-    def twoSum(self, numbers, target):
-        """
-        :type numbers: List[int]
-        :type target: int
-        :rtype: List[int]
-        """
-        l_idx = 0
-        r_idx = len(numbers) - 1
-        while l_idx < r_idx:  # or just while True, becasue we were garanteed to have solution
-            l_value = numbers[l_idx]
-            r_value = numbers[r_idx]
-            result = l_value + r_value
-            if result == target:
-                return [l_idx + 1, r_idx + 1]  # task demand to add this +1. I don't know why
-            elif result < target:
-                l_idx += 1
-            else:
-                r_idx -= 1
 
+from typing import List
+
+# Optimal solution without additional memory
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        l, r = 0, len(numbers) - 1
+        while l < r:
+            temp_sum = numbers[l] + numbers[r]
+            if temp_sum == target:
+                return [l + 1, r + 1] # +1 because leetcode demands it
+            elif temp_sum > target:
+                r -= 1
+            else:
+                l += 1
 
 # Non-optimal solution, just typical 2 sum with hash
 class Solution(object):
