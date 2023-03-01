@@ -1,4 +1,8 @@
 #https://leetcode.com/problems/top-k-frequent-elements/
+
+
+from typing import List
+
 # Naive approach with complexity O(n*Log(n)) - full sort at the end
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
