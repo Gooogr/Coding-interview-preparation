@@ -17,6 +17,6 @@ class Solution:
             elif token == '/':
                 a, b = stack.pop(), stack.pop()
                 stack.append(int(b / a))
-            else:
+            else: # because str.isdigit can't handle negative values like "-11"
                 stack.append(int(token))
         return stack[0]
