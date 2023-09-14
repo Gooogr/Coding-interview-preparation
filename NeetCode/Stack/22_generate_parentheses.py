@@ -9,16 +9,14 @@ from typing import List
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
         result = []
-        
-        def backtrack(Nopen, Nclosed, stack):
-            if Nopen == Nclosed == n:
-                tmp_result = ''.join(stack)
-                result.append(tmp_result)
+        def generate(n_open, n_closed, string):
+            if n_open == n_closed == n:
+                result.append(string)
                 return
-            if Nopen < n:
-                backtrack(Nopen + 1, Nclosed, stack + ['('])
-            if Nclosed < Nopen:
-                backtrack(Nopen, Nclosed + 1, stack + [')'])
-        
-        backtrack(0, 0, [])
+            if n_open < n:
+                generate(n_open + 1, n_closed, string + '(')
+            if n_closed < n_open:
+                generate(n_open, n_closed + 1, string + ')')
+
+        generate(0, 0, "")
         return result
